@@ -21,6 +21,7 @@ class Program
         // player one starts the game
         char currentPlayer = 'X';
         bool gameWon = false;
+        char winner = ' ';
 
         while (!gameWon)
         {
@@ -31,7 +32,11 @@ class Program
 
             board[row][col] = currentPlayer;
             ttb.PrintBoard();
+            
+            (gameWon, winner) = IsWinner();
         }
+        
+        Console.WriteLine($"Congratulations! Player {(winner == 'X' ? "1" : "2")} won the game!");
 
     }
 }
