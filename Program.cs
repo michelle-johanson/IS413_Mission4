@@ -1,9 +1,21 @@
-﻿namespace Mission4;
+﻿using System.Runtime.Loader;
+
+namespace Mission4;
 
 class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Hello, World!");
+        // TicTacBoard ttb = new TicTacBoard();
+        //
+        // // Code
+        //
+        // ttb.add(xloc, yloc, 'X');
+        //
+        // [
+        //     [],
+        //     [],
+        //     []
+        // ]
     }
 }
