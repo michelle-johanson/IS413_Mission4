@@ -14,33 +14,34 @@ class Program
         };
         TicTacBoard ttb = new TicTacBoard(board);
 
-        //Welcome user to the game 
-        Console.WriteLine("Welcome to the Tic-Tac-Toe Game!");
-        Console.WriteLine("Player 1 = X, Player 2 = O\n");
-
         // player one starts the game
-        char currentPlayer = 'X';
+        char currentPlayer = 'O';
         bool gameWon = false;
         char winner = ' ';
 
         while (!gameWon)
         {
-            Console.WriteLine($"Player {(currentPlayer == 'X' ? "1" : "2")}:");
-
-            ttb.Board = PlayTurn(currentPlayer, board);
-            ttb.PrintBoard();
+            // Clear console
+            Console.Clear();
             
+            // Switch current player
+            currentPlayer = currentPlayer == 'X' ? 'O' : 'X';
+            
+            // Welcome user to the game 
+            Console.WriteLine("Welcome to the Tic-Tac-Toe Game!");
+            Console.WriteLine("Player 1 = X, Player 2 = O\n");
+            
+            // Print board
+            ttb.PrintBoard();
+            Console.WriteLine("\n");
+            
+            // Take a turn
+            Console.WriteLine($"Player {(currentPlayer == 'X' ? "1" : "2")}:");
+            ttb.Board = PlayTurn(currentPlayer, board);
+            
+            // Check winner
             (gameWon, winner) = ttb.IsWinner();
             
-            // Switch player
-            if (currentPlayer == 'X')
-            {
-                currentPlayer = 'O';
-            }
-            else
-            {
-                currentPlayer = 'X';
-            }
         }
         
         Console.WriteLine($"Congratulations! Player {(winner == 'X' ? "1" : "2")} won the game!");
