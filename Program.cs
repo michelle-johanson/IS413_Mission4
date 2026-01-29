@@ -31,6 +31,16 @@ class Program
             ttb.PrintBoard();
             
             (gameWon, winner) = ttb.IsWinner();
+            
+            // Switch player
+            if (currentPlayer == 'X')
+            {
+                currentPlayer = 'O';
+            }
+            else
+            {
+                currentPlayer = 'X';
+            }
         }
         
         Console.WriteLine($"Congratulations! Player {(winner == 'X' ? "1" : "2")} won the game!");
