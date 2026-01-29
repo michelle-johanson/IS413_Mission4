@@ -6,13 +6,13 @@ class Program
 {
     static void Main(string[] args)
     {
-        TicTacBoard ttb = new TicTacBoard();
         char[][] board =
         {
             new char[3],
             new char[3],
             new char[3]
         };
+        TicTacBoard ttb = new TicTacBoard(board);
 
         //Welcome user to the game 
         Console.WriteLine("Welcome to the Tic-Tac-Toe Game!");
@@ -25,18 +25,26 @@ class Program
 
         while (!gameWon)
         {
-            Console.Write($"Player {(currentPlayer == 'X' ? "1" : "2")}: \nChoose a row (1-3): ");
-            int row = int.Parse(Console.ReadLine());
-            Console.Write($"Choose a column (1-3): ");
-            int col = int.Parse(Console.ReadLine());
+            Console.WriteLine($"Player {(currentPlayer == 'X' ? "1" : "2")}:");
 
-            board[row][col] = currentPlayer;
+            ttb.Board = PlayTurn(currentPlayer, board);
             ttb.PrintBoard();
             
-            (gameWon, winner) = IsWinner();
+            (gameWon, winner) = ttb.IsWinner();
         }
         
         Console.WriteLine($"Congratulations! Player {(winner == 'X' ? "1" : "2")} won the game!");
 
+    }
+
+    public static char[][] PlayTurn(char currentPlayer, char[][] board)
+    {
+        Console.Write($"Choose a row (1-3): ");
+        int row = int.Parse(Console.ReadLine()) - 1;
+        Console.Write($"Choose a column (1-3): ");
+        int col = int.Parse(Console.ReadLine()) - 1;
+        
+        board[row][col] = currentPlayer;
+        return board;
     }
 }
