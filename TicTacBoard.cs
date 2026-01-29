@@ -1,4 +1,4 @@
-namespace DefaultNamespace;
+namespace Mission4;
 
 public class TicTacBoard
 {
@@ -12,24 +12,24 @@ public class TicTacBoard
         
     public char[][] PrintBoard()
     {
-        foreach (char[] row in this.Board)
+        for (int r = 0; r < Board.Length; r++)
         {
-            foreach (char col in row)
+            Console.Write(" ");
+            for (int c = 0; c < Board[r].Length; c++)
             {
-                Console.Write(col.ToUpper());
-                if (col != row[^1])
-                {
-                    Console.Write(' | ');
-                }
-                
+                Console.Write(char.ToUpperInvariant(Board[r][c]));
+
+                if (c < Board[r].Length - 1)
+                    Console.Write(" | ");
             }
-            if (row != this.Board[^1])
-            {
+
+            Console.WriteLine(); // end the row
+
+            if (r < Board.Length - 1)
                 Console.WriteLine("---+---+---");
-            }
         }
 
-        return this.Board;
+        return Board;
     }
 
     public (bool, char) IsWinner()
@@ -38,44 +38,49 @@ public class TicTacBoard
         //chec if there is '3 in a row'
         foreach (char[] row in this.Board)
         {
-            if (row[0].ToUpper() == 'X' || row[0].ToUpper() == 'O')
+            if (char.ToUpper(row[0]) == 'X' || char.ToUpper(row[0]) == 'O')
             {
-                if (row[0] == row[1] && row[1] == row[2])
-                { 
+                if (row[0] == row[1] && row[0] == row[2])
+                {
                     return (true, row[0]);
                 }
             }
-        }
-        
-        
-        //check if there is '3 in a column'
-        for (int col = 0; col < this.Board.Length; col++)
-        {
-            if (row[0].ToUpper() == 'X' || row[0].ToUpper() == 'O')
+
+
+
+            //check if there is '3 in a column'
+            for (int col = 0; col < this.Board.Length; col++)
             {
-                if (this.Board[0][col] == this.Board[1][col] && this.Board[1][col] == this.Board[2][col])
+                if (char.ToUpper(row[0]) == 'X' || char.ToUpper(row[0]) == 'O')
                 {
-                    return (true, this.Board[0][col]);
+                    if (this.Board[0][col] == this.Board[1][col] && this.Board[1][col] == this.Board[2][col])
+                    {
+                        return (true, this.Board[0][col]);
+                    }
                 }
             }
         }
 
-        
-        if (row[0].ToUpper() == 'X' || row[0].ToUpper() == 'O')
+
+        if (char.ToUpper(this.Board[0][0]) == 'X' || char.ToUpper(this.Board[0][0]) == 'O')
         {
             //check diagonal 1
-            if (this.Board[0][0] == this.Board[1][1] == this.Board[2][2])
-                {
-                    return (true, this.Board[0][0]);
-                }
+            if (this.Board[0][0] == this.Board[1][1] && this.Board[1][1] == this.Board[2][2])
+            {
+                return (true, this.Board[0][0]);
+            }
+        }
+
+        if (char.ToUpper(this.Board[0][2]) == 'X' || char.ToUpper(this.Board[0][2]) == 'O')
+        {
             //check diagonal 2
             if (this.Board[0][2] == this.Board[1][1] && this.Board[1][1] == this.Board[2][0])
             {
                 return (true, this.Board[0][2]);
             }
         }
-        
-        
+
+
         //check if there is a cat's game (draw)
         if (IsBoardFull())
         {
@@ -92,7 +97,7 @@ public class TicTacBoard
         {
             foreach (char col in row)
             {
-                if (col.ToUpper() != 'X' && col.ToUpper() != 'O')
+                if (char.ToUpper(col) != 'X' && char.ToUpper(col) != 'O')
                 {
                     return false;
                 }

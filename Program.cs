@@ -8,16 +8,16 @@ class Program
     {
         char[][] board =
         {
-            new char[] { '-', '-', '-' },
-            new char[] { '-', '-', '-' },
-            new char[] { '-', '-', '-' }
+            new char[] { ' ', ' ', ' ' },
+            new char[] { ' ', ' ', ' ' },
+            new char[] { ' ', ' ', ' ' }
         };
         TicTacBoard ttb = new TicTacBoard(board);
 
         // player one starts the game
         char currentPlayer = 'O';
         bool gameWon = false;
-        char winner = ' ';
+        char winner = '\0';
 
         while (!gameWon)
         {
@@ -62,7 +62,7 @@ class Program
             int col = GetValidInput("Choose a column (1-3): ") - 1;
 
             // Check if the spot is already taken
-            if (board[row][col] == '-') 
+            if (board[row][col] == ' ') 
             {
                 // Spot is free, make the move
                 board[row][col] = currentPlayer;
