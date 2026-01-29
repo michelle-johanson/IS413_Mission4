@@ -21,7 +21,7 @@ git checkout -b yourbranch # Create a new branch for yourself
 
 ## Make your edits
 ```bash
-git add .
+git add changedfile.cs # Only commit your own file
 git status # View your edits
 
 git commit -m "Describe your change"
