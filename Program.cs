@@ -33,6 +33,7 @@ class Program
             
             // Print board
             ttb.PrintBoard();
+            // Console.WriteLine("\n");
             
             // Take a turn
             Console.WriteLine($"Player {(currentPlayer == 'X' ? "1" : "2")}:");
@@ -48,6 +49,7 @@ class Program
         Console.WriteLine("Welcome to the Tic-Tac-Toe Game!");
         Console.WriteLine("Player 1 = X; Player 2 = O\n");
         ttb.PrintBoard();
+        // Console.WriteLine("\n");
         Console.WriteLine($"Congratulations! Player {(winner == 'X' ? "1" : "2")} won the game!");
 
     }
