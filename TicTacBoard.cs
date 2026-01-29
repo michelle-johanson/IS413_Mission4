@@ -1,4 +1,4 @@
-namespace DefaultNamespace;
+namespace Mission4;
 
 public class TicTacBoard
 {
@@ -8,91 +8,85 @@ public class TicTacBoard
     {
         this.Board = board;
     }
-    
-        
     public char[][] PrintBoard()
     {
-        foreach (char[] row in this.Board)
+        for (int row = 0; row < this.Board.Length; row++)
         {
-            foreach (char col in row)
+            for (int col = 0; col < this.Board[row].Length; col++)
             {
-                Console.Write(col.ToUpper());
-                if (col != row[^1])
-                {
-                    Console.Write(' | ');
-                }
-                
+                Console.Write($" {char.ToUpper(this.Board[row][col])} ");
             }
-            if (row != this.Board[^1])
-            {
-                Console.WriteLine("---+---+---");
-            }
+            Console.WriteLine();
         }
-
+        Console.WriteLine();
         return this.Board;
     }
-
+    
     public (bool, char) IsWinner()
     {
-
-        //chec if there is '3 in a row'
-        foreach (char[] row in this.Board)
+        // 1. Check Rows
+        // We iterate 0 to 2 to check every row
+        for (int row = 0; row < 3; row++)
         {
-            if (row[0].ToUpper() == 'X' || row[0].ToUpper() == 'O')
+            // Check if the first cell is not a dash, and if all three match
+            if (this.Board[row][0] != '-' && 
+                this.Board[row][0] == this.Board[row][1] && 
+                this.Board[row][1] == this.Board[row][2])
             {
-                if (row[0] == row[1] && row[1] == row[2])
-                { 
-                    return (true, row[0]);
-                }
-            }
-        }
-        
-        
-        //check if there is '3 in a column'
-        for (int col = 0; col < this.Board.Length; col++)
-        {
-            if (row[0].ToUpper() == 'X' || row[0].ToUpper() == 'O')
-            {
-                if (this.Board[0][col] == this.Board[1][col] && this.Board[1][col] == this.Board[2][col])
-                {
-                    return (true, this.Board[0][col]);
-                }
+                return (true, this.Board[row][0]);
             }
         }
 
-        
-        if (row[0].ToUpper() == 'X' || row[0].ToUpper() == 'O')
+        // 2. Check Columns
+        // We iterate 0 to 2 to check every column
+        for (int col = 0; col < 3; col++)
         {
-            //check diagonal 1
-            if (this.Board[0][0] == this.Board[1][1] == this.Board[2][2])
-                {
-                    return (true, this.Board[0][0]);
-                }
-            //check diagonal 2
-            if (this.Board[0][2] == this.Board[1][1] && this.Board[1][1] == this.Board[2][0])
+            // Check if the top cell is not a dash, and if all three match downwards
+            if (this.Board[0][col] != '-' && 
+                this.Board[0][col] == this.Board[1][col] && 
+                this.Board[1][col] == this.Board[2][col])
             {
-                return (true, this.Board[0][2]);
+                return (true, this.Board[0][col]);
             }
         }
-        
-        
-        //check if there is a cat's game (draw)
+
+        // 3. Check Diagonals
+    
+        // Diagonal 1 (Top-Left to Bottom-Right)
+        if (this.Board[0][0] != '-' && 
+            this.Board[0][0] == this.Board[1][1] && 
+            this.Board[1][1] == this.Board[2][2])
+        {
+            return (true, this.Board[0][0]);
+        }
+
+        // Diagonal 2 (Top-Right to Bottom-Left)
+        if (this.Board[0][2] != '-' && 
+            this.Board[0][2] == this.Board[1][1] && 
+            this.Board[1][1] == this.Board[2][0])
+        {
+            return (true, this.Board[0][2]);
+        }
+
+        // 4. Check for Draw (Cat's Game)
+        // If the board is full and no one won yet, the game is over (true) but the winner is 'C' (Cat)
         if (IsBoardFull())
         {
-            return (false, 'C');
+            return (true, 'C'); 
         }
-        
-        return (false, 'U');
+    
+        // Game continues
+        return (false, ' ');
     }
 
-    //check if board is full
+    // Check if board is full
     public bool IsBoardFull()
     {
         foreach (char[] row in this.Board)
         {
             foreach (char col in row)
             {
-                if (col.ToUpper() != 'X' && col.ToUpper() != 'O')
+                if (char.ToUpper(col) != 'X' && char.ToUpper(col) != 'O')
                 {
                     return false;
                 }
