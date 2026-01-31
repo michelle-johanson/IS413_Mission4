@@ -28,7 +28,7 @@ public class TicTacBoard
             if (r < Board.Length - 1)
                 Console.WriteLine("---+---+---");
         }
-
+        Console.WriteLine();
         return Board;
     }
 
