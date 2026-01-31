@@ -43,12 +43,25 @@ class Program
             
         }
         
-        // Display winning board
-        Console.Clear();
-        Console.WriteLine("Welcome to the Tic-Tac-Toe Game!");
-        Console.WriteLine("Player 1 = X; Player 2 = O\n");
-        ttb.PrintBoard();
-        Console.WriteLine($"Congratulations! Player {(winner == 'X' ? "1" : "2")} won the game!");
+        //cat's game (draw)
+        if (winner == 'C')
+        {
+            Console.Clear();
+            Console.WriteLine("Welcome to the Tic-Tac-Toe Game!");
+            Console.WriteLine("Player 1 = X; Player 2 = O\n");
+            ttb.PrintBoard();
+            Console.WriteLine("Cat's Game! Maybe one of you will be more clever next time...");
+        }
+        //winner is X or O
+        else
+        {
+            // Display winning board
+            Console.Clear();
+            Console.WriteLine("Welcome to the Tic-Tac-Toe Game!");
+            Console.WriteLine("Player 1 = X; Player 2 = O\n");
+            ttb.PrintBoard();
+            Console.WriteLine($"Congratulations! Player {(winner == 'X' ? "1" : "2")} won the game!");
+        }
 
     }
 
