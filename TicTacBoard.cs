@@ -34,60 +34,52 @@ public class TicTacBoard
 
     public (bool, char) IsWinner()
     {
-
-        //chec if there is '3 in a row'
-        foreach (char[] row in this.Board)
+        // rows
+        for (int r = 0; r < 3; r++)
         {
-            if (char.ToUpper(row[0]) == 'X' || char.ToUpper(row[0]) == 'O')
-            {
-                if (row[0] == row[1] && row[0] == row[2])
-                {
-                    return (true, row[0]);
-                }
-            }
+            char a = char.ToUpperInvariant(Board[r][0]);
+            char b = char.ToUpperInvariant(Board[r][1]);
+            char c = char.ToUpperInvariant(Board[r][2]);
 
-
-
-            //check if there is '3 in a column'
-            for (int col = 0; col < this.Board.Length; col++)
-            {
-                if (char.ToUpper(row[0]) == 'X' || char.ToUpper(row[0]) == 'O')
-                {
-                    if (this.Board[0][col] == this.Board[1][col] && this.Board[1][col] == this.Board[2][col])
-                    {
-                        return (true, this.Board[0][col]);
-                    }
-                }
-            }
+            if ((a == 'X' || a == 'O') && a == b && a == c)
+                return (true, a);
         }
 
-
-        if (char.ToUpper(this.Board[0][0]) == 'X' || char.ToUpper(this.Board[0][0]) == 'O')
+        // columns
+        for (int col = 0; col < 3; col++)
         {
-            //check diagonal 1
-            if (this.Board[0][0] == this.Board[1][1] && this.Board[1][1] == this.Board[2][2])
-            {
-                return (true, this.Board[0][0]);
-            }
+            char a = char.ToUpperInvariant(Board[0][col]);
+            char b = char.ToUpperInvariant(Board[1][col]);
+            char c = char.ToUpperInvariant(Board[2][col]);
+
+            if ((a == 'X' || a == 'O') && a == b && a == c)
+                return (true, a);
         }
 
-        if (char.ToUpper(this.Board[0][2]) == 'X' || char.ToUpper(this.Board[0][2]) == 'O')
+        // diagonal top-left -> bottom-right
         {
-            //check diagonal 2
-            if (this.Board[0][2] == this.Board[1][1] && this.Board[1][1] == this.Board[2][0])
-            {
-                return (true, this.Board[0][2]);
-            }
+            char a = char.ToUpperInvariant(Board[0][0]);
+            char b = char.ToUpperInvariant(Board[1][1]);
+            char c = char.ToUpperInvariant(Board[2][2]);
+
+            if ((a == 'X' || a == 'O') && a == b && a == c)
+                return (true, a);
         }
 
+        // diagonal top-right -> bottom-left
+        {
+            char a = char.ToUpperInvariant(Board[0][2]);
+            char b = char.ToUpperInvariant(Board[1][1]);
+            char c = char.ToUpperInvariant(Board[2][0]);
 
-        //check if there is a cat's game (draw)
+            if ((a == 'X' || a == 'O') && a == b && a == c)
+                return (true, a);
+        }
+
         if (IsBoardFull())
-        {
-            return (false, 'C');
-        }
-        
-        return (false, 'U');
+            return (true, 'C'); // cat's game
+
+        return (false, 'U'); // unfinished
     }
 
     //check if board is full
