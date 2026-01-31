@@ -1,6 +1,6 @@
 # GitHub Terminal Help
 
-## 1. Clone the Repository
+## Clone the Repository
 
 Open your terminal, then run:
 ```bash
@@ -48,6 +48,13 @@ Before starting any new work:
 git checkout main
 git pull origin main
 ```
+If you have any local changes that prevent you from pulling from the repo, 
+you can wipe your local changes with:
+```bash
+git restore .
+git pull origin main
+```
+
 Then create a new branch again for your next task:
 ```bash
 # Check current branch
